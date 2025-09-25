@@ -1,4 +1,4 @@
-module database
+module github.com/rgglez/database
 
 go 1.24.5
 
