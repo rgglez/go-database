@@ -2,17 +2,11 @@ package database
 
 import (
 	"fmt"
-	"sync"
 
 	gormcache "github.com/rgglez/gormcache"
 	gormzerolog "github.com/vitaliy-art/gorm-zerolog"
 	"gorm.io/gorm"
 )
-
-//-----------------------------------------------------------------------------
-
-// Connections cache
-var DatabaseCache *sync.Map
 
 //-----------------------------------------------------------------------------
 
