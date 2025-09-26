@@ -1,8 +1,6 @@
 package database
 
 import (
-	"crypto/sha1"
-	"encoding/hex"
 	"fmt"
 	"log"
 	"time"
@@ -69,17 +67,6 @@ func (f MySQLFactory) Create(database interface{}) (Database, error) {
 
 // GetConnection returns a *gorm.DB persistent for tenant
 func (d MySQL) GetConnection() (*gorm.DB, error) {
-	// Get the cache connection key from the DSN
-	hasher := sha1.New()
-	hasher.Write([]byte(d.Dsn))
-	hash := hasher.Sum(nil)
-	key := hex.EncodeToString(hash)
-
-	// Return the cached connection
-	if gdb, ok := DatabaseCache.Load(key); ok {
-		return gdb.(*gorm.DB), nil
-	}
-
 	// Set the logger if injected
 	var gormConfig *gorm.Config = nil
 	if d.Logger != nil {
@@ -116,8 +103,6 @@ func (d MySQL) GetConnection() (*gorm.DB, error) {
 	sqlDB.SetMaxIdleConns(d.MaxIdleConn)
 	sqlDB.SetConnMaxLifetime(d.MaxLifeTime * time.Minute)
 	sqlDB.SetConnMaxIdleTime(d.MaxIdleTime * time.Minute)
-
-	DatabaseCache.Store(key, conn)
 
 	return conn, nil
 }

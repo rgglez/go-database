@@ -2,14 +2,11 @@ package database
 
 import (
 	"fmt"
-	"sync"
 
 	gormcache "github.com/rgglez/gormcache"
 	gormzerolog "github.com/vitaliy-art/gorm-zerolog"
 	"gorm.io/gorm"
 )
-
-//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 
@@ -34,11 +31,6 @@ type BaseDatabase struct {
 	Cache  *gormcache.GormCache
 	Debug  bool
 }
-
-//-----------------------------------------------------------------------------
-
-// Connections cache
-var DatabaseCache *sync.Map
 
 //-----------------------------------------------------------------------------
 
