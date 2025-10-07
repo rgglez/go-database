@@ -41,7 +41,7 @@ var factories = map[string]DatabaseFactory{
 
 //-----------------------------------------------------------------------------
 
-func NewDatabase(dbType string, database ...interface{}) (Database, error) {
+func NewDatabase(dbType string, database interface{}) (Database, error) {
 	var factory DatabaseFactory
 	var exists bool
 
